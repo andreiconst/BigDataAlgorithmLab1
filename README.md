@@ -15,26 +15,29 @@ To realise our TF-IDF implementation in hadoop, 5 map-reduce passes were impleme
 
 5- Third tf-idf pass : Here we include the information from 1, and thus we have all the needed information to compute the tf-idf scores of each word. Below is the list of the 20 words with the highest tf-idf score. More on the results can be found in the results folder. All the code is in the code folder.
 
-buck	callwild.txt	0.006827639
-dogs	callwild.txt	0.002443117
-thornton	callwild.txt	0.001766897
-myself	defoe-robinson.txt	0.001668513
-spitz	callwild.txt	0.001308813
-sled	callwild.txt	0.001308813
-francois	callwild.txt	0.001134304
-bucks	callwild.txt	0.001025237
-friday	defoe-robinson.txt	0.001022821
-trail	callwild.txt	0.000894355
-john	callwild.txt	0.000872542
-perrault	callwild.txt	0.000807101
-team	callwild.txt	0.000654406
-hal	callwild.txt	0.000654406
-thoughts	defoe-robinson.txt	0.000634264
-traces	callwild.txt	0.000610779
-ice	callwild.txt	0.000610779
-solleks	callwild.txt	0.000588966
-around	callwild.txt	0.000567152
-dave	callwild.txt	0.000523525
+| Word        | Doc           | Score  |
+| ------------- |:-------------:| -----:|
+| buck      | callwild.txt | 0.006827639 |
+| dogs      | callwild.txt      |   0.002443117 |
+| thornton | callwild.txt      |    0.001766897 |
+| myself      | defoe-robinson.txt | 0.001668513 |
+| spitz      | callwild.txt      |   0.001308813 |
+| sled | callwild.txt      |    0.001308813 |
+| francois     | callwild.txt | 0.001134304 |
+| bucks     | callwild.txt      |   0.001025237 |
+| friday | defoe-robinson.txt     |    0.001022821 |
+| trail      | callwild.txt | 0.000894355 |
+| john      | callwild.txt      |   0.000872542 |
+| perrault | callwild.txt      |    0.000807101 |
+| team      | callwild.txt | 0.000654406 |
+| hal      | callwild.txt      |   0.000654406 |
+| thoughts | defoe-robinson.txt      |    0.000634264 |
+| traces      | callwild.txt      |   0.000610779 |
+| ice | callwild.txt      |    0.000610779 |
+| solleks      | callwild.txt | 0.000588966 |
+| around      | callwild.txt      |   0.000567152 |
+| dave | callwild.txt      |    0.000523525 |
+
 
 # 4.2 Page-Rank
 
