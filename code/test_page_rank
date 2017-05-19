@@ -1,0 +1,43 @@
+#!/bin/bash
+
+bool=true
+count=0
+#loop through until stationary distribution is reached
+
+while [ "$bool" = true ]
+do
+	echo "ITERATION "$count
+	#create first file with name of page, score, and links to other pages
+	hadoop jar ~/Desktop/ecplab1.jar  page_rank.PageRank1 soc-Epinions1.txt outputPR1
+	#copy vector stored locally to folder with output from completed job
+	hdfs dfs -mkdir inputPR2
+	hdfs dfs -cp outputPR1/part-r-00000 inputPR2
+	hadoop jar ~/Desktop/ecplab1.jar  page_rank.PageRank2 inputPR2 outputPR2
+
+        hdfs dfs -mkdir inputPR3
+        hdfs dfs -cp outputPR2/part-r-00000 inputPR3
+
+	hadoop jar ~/Desktop/ecplab1.jar  page_rank.PageRank3 inputPR3 outputPR3   
+	hadoop fs -cat outputPR3/part\* | head
+	
+	DIFF="$(hadoop fs -cat outputPR3/part-r-00000)"
+	#if vectors similar enough, then stop job
+	if [ $DIFF -eq "1" ]  || [ $count -gt 99 ]; then
+		bool=false
+	fi
+	
+
+	#copy to local the output from the job
+	/bin/rm -f  ./workspace/ecp.lab1/previous_page_rank.txt
+	hadoop fs -cat outputPR2/part-r-00000 > ~/workspace/ecp.lab1/previous_page_rank.txt 
+	#remove the old vector
+	hadoop fs -rm -r outputPR1
+	hadoop fs -rm -r inputPR2
+	hadoop fs -rm -r outputPR2
+	hadoop fs -rm -r inputPR3
+	hadoop fs -rm -r outputPR3
+	count=$(($count + 1))
+
+done
+
+echo "Number of iterations was: "$count
